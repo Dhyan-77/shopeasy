@@ -9,12 +9,15 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+from dotenv import load_dotenv
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -23,20 +26,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!%f&%xv5$yp^nah3paamk^qo*4a$9s=#us^n2b)0*qc5wq+pm8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+#ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOW_ALL_ORIGINS = False
 # Netlify (production) + local dev (so npm run dev → Railway works)
 CORS_ALLOWED_ORIGINS = [
-    "https://gymsaasdhyan.netlify.app",
-    "https://www.gymsaasdhyan.netlify.app",
-    "https://dhyan.netlify.app",
-    "https://www.dhyan.netlify.app",
+ 
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
+
+
+
+RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")
+RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
+RAZORPAY_YEARLY_PLAN_ID = os.getenv("RAZORPAY_YEARLY_PLAN_ID")
 
 # Application definition
 
